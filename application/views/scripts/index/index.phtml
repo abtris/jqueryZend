@@ -1,45 +1,68 @@
-<?php
+<script type="text/javascript">
+    $(function() {
+        $('#open').click(function() {
+			$('#dialog').dialog('open');
+		})
+		.hover(
+			function(){
+				$(this).addClass("ui-state-hover");
+			},
+			function(){
+				$(this).removeClass("ui-state-hover");
+			}
+		).mousedown(function(){
+			$(this).addClass("ui-state-active");
+		})
+		.mouseup(function(){
+				$(this).removeClass("ui-state-active");
+		});
 
- $this->headLink()->appendStylesheet($this->baseUrl() . '/css/jquery-ui-1.7.2.redmond.css',"screen,projection");
-?>
+    });
+</script>
 
-<style>
-    a:link,
-    a:visited
-    {
-        color: #0398CA;
-    }
-
-    span#zf-name
-    {
-        color: #91BE3F;
-    }
-
-    div#welcome
-    {
-        color: #FFFFFF;
-        background-image: url(http://framework.zend.com/images/bkg_header.jpg);
-        width:  600px;
-        height: 400px;
-        border: 2px solid #444444;
-        overflow: hidden;
-        text-align: center;
-    }
-
-    div#more-information
-    {
-        background-image: url(http://framework.zend.com/images/bkg_body-bottom.gif);
-        height: 100%;
-    }
+<style type="text/css">
+    #login label { width:80px; text-align:right; float: left; padding-right: 1em; }
+    #login input { width:200px; text-align:left; float: left; }
+    #login div { clear: left; }
+    #login button { margin:5px;}
+    #login div.center { text-align:center; }
 </style>
-
 <div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework!</span></h1>
+    <h1>Welcome to the <span id="zf-name">Zend Framework and jQuery!</span></h1>
 
-    <h3>This is your project's main page</h3>
+    
+<h3>Date picker</h3>
 
 Pick your Date: <?php echo $this->datePicker("dp1",
                             '',
                         array('defaultDate' => date('Y/m/d', time()))); ?>
-
 </div>
+
+<h3>Form dialog</h3>
+
+<div>
+Open <a id="open" href="#">dialog</a>
+</div>
+
+<h3>Tab</h3>
+
+<?php
+
+$this->tabPane("newstab",
+                  "text",
+                  array('title' => "title"));
+
+echo $this->tabContainer("newstab",
+                        array('ddd'),
+                        array('class' => 'flora')); 
+
+
+$content = "<form id='login' method='post' action='".$this->url(array("controller"=>"index", "action"=>"auth"))."'>";
+$content .= "<div><label for='login'>Login</label><input name='login' /></div>";
+$content .= "<div><label for='pass'>Password</label><input name='pass' type='password' /></div>";
+$content .= "<div class='center'><button type='submit'>Login</button></div>";
+$content .= "</form>";
+
+
+echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false, 'width'=> 360, 'height' => 150), array());
+?>

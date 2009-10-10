@@ -13,6 +13,14 @@ class IndexController extends Zend_Controller_Action
         // action body
     }
 
+    public function authAction()
+    {
+
+        var_dump($this->_request->getParams());
+        $this->render('index');
+
+    }
+
 
 }
 
