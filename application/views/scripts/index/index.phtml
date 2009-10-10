@@ -1,3 +1,8 @@
+<?php
+
+ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/jquery-ui-1.7.2.redmond.css',"screen,projection");
+?>
+
 <style>
     a:link,
     a:visited
@@ -27,17 +32,14 @@
         height: 100%;
     }
 </style>
+
 <div id="welcome">
     <h1>Welcome to the <span id="zf-name">Zend Framework!</span></h1>
 
     <h3>This is your project's main page</h3>
 
-    <div id="more-information">
-        <p><img src="http://framework.zend.com/images/PoweredBy_ZF_4LightBG.png" /></p>
-        <p>
-            Helpful Links: <br />
-            <a href="http://framework.zend.com/">Zend Framework Website</a> |
-            <a href="http://framework.zend.com/manual/en/">Zend Framework Manual</a>
-        </p>
-    </div>
+Pick your Date: <?php echo $this->datePicker("dp1",
+                            '',
+                        array('defaultDate' => date('Y/m/d', time()))); ?>
+
 </div>

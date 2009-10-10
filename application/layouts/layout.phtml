@@ -1,0 +1,25 @@
+<?php echo $this->docType() ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headScript() ?>
+    <?php echo $this->headMeta() ?>
+    <?php echo $this->headLink()->toString(); ?>
+    <?php $this->jQuery()->setLocalPath('http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js')
+               ->addStylesheet('http://localhost/zend/js/jquery/themes/ui.datepicker.css'); 
+          echo $this->jQuery();
+    ?>
+
+</head>
+<body>
+
+<div id="wrap">
+
+	<div id="content">
+                <?php echo $this->layout()->content; ?>
+	</div>
+
+
+</div>
+</body>
+</html>
