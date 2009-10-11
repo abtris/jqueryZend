@@ -21,11 +21,11 @@
 </script>
 
 <style type="text/css">
-    #login label { width:80px; text-align:right; float: left; padding-right: 1em; }
-    #login input { width:200px; text-align:left; float: left; }
-    #login div { clear: left; }
-    #login button { margin:5px;}
-    #login div.center { text-align:center; }
+    
+    #login input { width:200px;  }
+    #login #submitbutton { width: 80px; }
+    #login dd { text-align: center; }
+    
 </style>
 <div id="welcome">
     <h1>Welcome to the <span id="zf-name">Zend Framework and jQuery!</span></h1>
@@ -56,13 +56,15 @@ echo $this->tabContainer("newstab",
                         array('ddd'),
                         array('class' => 'flora')); 
 
-
+/**
 $content = "<form id='login' method='post' action='".$this->url(array("controller"=>"index", "action"=>"auth"))."'>";
 $content .= "<div><label for='login'>Login</label><input name='login' /></div>";
 $content .= "<div><label for='pass'>Password</label><input name='pass' type='password' /></div>";
 $content .= "<div class='center'><button type='submit'>Login</button></div>";
 $content .= "</form>";
+*/
 
-
-echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false, 'width'=> 360, 'height' => 160), array());
+$content = $this->form;
+                        
+echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false), array());
 ?>
