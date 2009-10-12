@@ -16,6 +16,9 @@
 		.mouseup(function(){
 				$(this).removeClass("ui-state-active");
 		});
+       $("#accordion").accordion({
+			event: "mouseover"
+		});
 
     });
 </script>
@@ -30,41 +33,51 @@
 <div id="welcome">
     <h1>Welcome to the <span id="zf-name">Zend Framework and jQuery!</span></h1>
 
+<div id="accordion">
     
-<h3>Date picker</h3>
-
+<h3><a href="#">Date picker</a></h3>
+<div>
 Pick your Date: <?php echo $this->datePicker("dp1",
                             '',
                         array('defaultDate' => date('Y/m/d', time()))); ?>
 </div>
 
-<h3>Form dialog</h3>
+<h3><a href="#">Form dialog</a></h3>
 
 <div>
 Open <a id="open" href="#">dialog</a>
 </div>
 
-<h3>Tab</h3>
-
+<h3><a href="#">Tab container</a></h3>
+<div>
 <?php
 
+$tabContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi orci lacus, luctus id dictum non, lacinia at felis. In elit orci, suscipit quis aliquam vel, mollis et felis. Vivamus eget elit urna. Praesent gravida elit ultrices est mattis dapibus. Fusce sollicitudin dictum felis, a euismod enim congue porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum sit amet arcu lorem, nec elementum ipsum. Phasellus sit amet purus dui, et venenatis massa. Phasellus vel ornare lorem. Donec at tellus sollicitudin risus semper ornare non nec lacus. Vivamus elementum vehicula erat sed ultrices.
+
+In ante arcu, faucibus pharetra scelerisque id, commodo sit amet felis. Vestibulum vitae massa ligula, vitae tempor felis. Fusce rutrum, velit nec venenatis lobortis, est mi porta ligula, nec dictum enim magna a lorem. Nullam tempus iaculis nulla. Sed luctus lorem vitae purus pretium eu vestibulum tellus tincidunt. Sed in ipsum sit amet turpis fermentum cursus at id eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Donec mauris quam, tempus eget pharetra vitae, rhoncus ut metus. Aliquam tincidunt vehicula cursus.
+
+Sed faucibus condimentum porttitor. Nullam consectetur ultrices turpis, nec euismod purus varius in. Suspendisse vel blandit arcu. Suspendisse auctor diam eu nunc volutpat malesuada sed a dolor. Sed vitae tellus vitae mi vulputate pellentesque non quis nulla. Aenean a libero in magna aliquet fringilla eget et tellus. Suspendisse potenti. Aliquam sodales blandit tortor, id lacinia magna luctus vel. Cras tempus odio et sem varius aliquam vulputate ligula lacinia. Cras malesuada tincidunt eros, et sagittis augue rhoncus nec. Praesent arcu risus, condimentum vitae facilisis egestas, feugiat et felis. Integer pharetra est lorem, nec lobortis leo. Vestibulum id ipsum et urna rutrum tempus. Nullam imperdiet commodo velit commodo interdum.';
+
+$tabContentTwo = 'Mauris sollicitudin ullamcorper risus a imperdiet. In quis risus justo, id lacinia ipsum. Donec id dictum turpis. Nulla vitae magna vel dui dapibus posuere. Phasellus ac ante erat, ac tempus nisi. Nunc ligula enim, vehicula sollicitudin lacinia a, feugiat suscipit leo. Mauris cursus vehicula diam, ut ornare magna iaculis nec. Vestibulum dolor urna, mollis vel tincidunt vel, fringilla eget libero. Pellentesque porttitor, dolor nec porta lobortis, tortor magna porttitor metus, eu vestibulum neque neque vitae est. Vestibulum aliquam suscipit ultricies. Nulla eu elit luctus dui lobortis pulvinar quis vitae neque. Sed sed lorem elit, in posuere odio. Suspendisse sodales, risus faucibus auctor euismod, lacus turpis viverra arcu, non vulputate dolor tortor eget urna. Nullam eu vestibulum lorem. Sed sed metus lacus, quis tempus elit. Etiam laoreet hendrerit ipsum sit amet tincidunt. Nullam vulputate eros vitae est tempor id laoreet urna rhoncus. Nulla nisi libero, porta at ultricies in, congue vitae diam. Morbi dui enim, tincidunt eu tincidunt id, luctus condimentum lacus.
+
+Duis ut massa ut augue bibendum hendrerit id a quam. Quisque est ante, aliquet a facilisis id, sagittis et elit. Praesent bibendum pharetra purus sed ultricies. Cras posuere rhoncus enim, id faucibus orci ornare tempor. Nam at sapien vel erat lobortis sagittis a eu mi. Cras posuere convallis lacinia. Duis ullamcorper nibh eget nibh accumsan fermentum. Morbi mauris enim, viverra sit amet facilisis ac, lobortis sed sem. Pellentesque pulvinar, enim sit amet condimentum faucibus, arcu tellus luctus ligula, et dictum nisl erat eu est. Curabitur tristique posuere ligula, quis bibendum arcu vehicula a. Duis id rhoncus mauris. Pellentesque ac turpis nec sem posuere feugiat sit amet eu odio. Nulla ut erat quis nisi feugiat gravida. Sed iaculis luctus libero at condimentum. Aliquam sed enim magna, in semper lectus. Ut id leo non orci convallis adipiscing varius a quam. Nunc nec nibh risus, nec vulputate turpis. ';
+
 $this->tabPane("newstab",
-                  "text",
-                  array('title' => "title"));
+                  nl2br($tabContent),
+                  array('title' => "Section 1"));
+
+$this->tabPane("newstab",
+                  nl2br($tabContentTwo),
+                  array('title' => "Section 2"));
 
 echo $this->tabContainer("newstab",
                         array('ddd'),
                         array('class' => 'flora')); 
 
-/**
-$content = "<form id='login' method='post' action='".$this->url(array("controller"=>"index", "action"=>"auth"))."'>";
-$content .= "<div><label for='login'>Login</label><input name='login' /></div>";
-$content .= "<div><label for='pass'>Password</label><input name='pass' type='password' /></div>";
-$content .= "<div class='center'><button type='submit'>Login</button></div>";
-$content .= "</form>";
-*/
-
 $content = $this->form;
                         
 echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false), array());
+
 ?>
+</div>
+</div>
