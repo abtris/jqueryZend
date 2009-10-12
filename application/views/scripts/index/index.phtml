@@ -28,15 +28,20 @@
     #login input { width:200px;  }
     #login #submitbutton { width: 80px; }
     #login dd { text-align: center; }
-    
+    pre { background: #eee; border: 1px solid black; padding: 5px; overflow: auto; }
 </style>
 <div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework and jQuery!</span></h1>
+    <h1>Welcome to the <span id="zf-name">Zend Framework and jQuery UI!</span></h1>
 
 <div id="accordion">
     
 <h3><a href="#">Date picker</a></h3>
 <div>
+<pre>
+Pick your Date: &lt;?php echo $this->datePicker("dp1",
+                            '',
+                        array('defaultDate' => date('Y/m/d', time()))); ?&gt;</pre>
+
 Pick your Date: <?php echo $this->datePicker("dp1",
                             '',
                         array('defaultDate' => date('Y/m/d', time()))); ?>
@@ -45,11 +50,48 @@ Pick your Date: <?php echo $this->datePicker("dp1",
 <h3><a href="#">Form dialog</a></h3>
 
 <div>
+<pre>
+
+Open &lt;a id="open" href="#"&gt;dialog&lt;/a&gt;
+
+&lt;?php
+$content = $this->form;
+
+echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false), array());
+
+?&gt;
+
+</pre>
+
 Open <a id="open" href="#">dialog</a>
 </div>
 
+<?php
+$content = $this->form;
+
+echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false), array());
+
+?>
+
 <h3><a href="#">Tab container</a></h3>
 <div>
+    <pre>
+&lt;?php
+$tabContent = 'Lorem ipsum dolor sit amet, consectetur ...';
+
+$tabContentTwo = 'Mauris sollicitudin ullamcorper risus a imperdiet. ... ';
+
+$this->tabPane("newstab",
+                  nl2br($tabContent),
+                  array('title' => "Section 1"));
+
+$this->tabPane("newstab",
+                  nl2br($tabContentTwo),
+                  array('title' => "Section 2"));
+
+echo $this->tabContainer("newstab",
+                        array('ddd'),
+                        array('class' => 'flora'));    ?&gt; </pre>
 <?php
 
 $tabContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi orci lacus, luctus id dictum non, lacinia at felis. In elit orci, suscipit quis aliquam vel, mollis et felis. Vivamus eget elit urna. Praesent gravida elit ultrices est mattis dapibus. Fusce sollicitudin dictum felis, a euismod enim congue porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum sit amet arcu lorem, nec elementum ipsum. Phasellus sit amet purus dui, et venenatis massa. Phasellus vel ornare lorem. Donec at tellus sollicitudin risus semper ornare non nec lacus. Vivamus elementum vehicula erat sed ultrices.
@@ -74,10 +116,35 @@ echo $this->tabContainer("newstab",
                         array('ddd'),
                         array('class' => 'flora')); 
 
-$content = $this->form;
-                        
-echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false), array());
+?>
+</div>
+
+<h3><a href="#">Accordion Container</a></h3>
+<div>
+    <pre>
+&lt;?php
+$contentAcc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+$contentAccTwo = 'Sed faucibus condimentum porttitor. Nullam consectetur ultrices turpis, nec euismod purus varius in.';
+
+$this->accordionPane("accpanel", $contentAcc, array('title'=>'Section 1'));
+
+$this->accordionPane("accpanel", $contentAccTwo, array('title'=>'Section 2'));
+
+echo $this->accordionContainer("accpanel", array(), array()); ?&gt;</pre>
+<?php
+
+$contentAcc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+$contentAccTwo = 'Sed faucibus condimentum porttitor. Nullam consectetur ultrices turpis, nec euismod purus varius in.';
+
+$this->accordionPane("accpanel", $contentAcc, array('title'=>'Section 1'));
+
+$this->accordionPane("accpanel", $contentAccTwo, array('title'=>'Section 2'));
+
+echo $this->accordionContainer("accpanel", array(), array());
 
 ?>
+
 </div>
 </div>
