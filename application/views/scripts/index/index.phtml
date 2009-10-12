@@ -17,14 +17,16 @@
 				$(this).removeClass("ui-state-active");
 		});
        $("#accordion").accordion({
-			event: "mouseover"
+			event: "mouseover",
+                        autoHeight: false
+
 		});
 
     });
 </script>
 
 <style type="text/css">
-    
+    body { font-size: 10px; font-family: "Trebuchet MS","Helvetica","Arial","Verdana","sans-serif";}
     #login input { width:200px;  }
     #login #submitbutton { width: 80px; }
     #login dd { text-align: center; }
