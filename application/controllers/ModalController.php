@@ -12,17 +12,20 @@ class ModalController extends Zend_Controller_Action
 
     public function testAction()
     {
-        Zend_Debug::dump($this->_request->getParams());
-        die();
-
-        $value = $this->_request->getParam('id', 0);        
-        if (!empty($value)) {
-           Model_Items::addItem($value); 
+        $task = $this->_request->getParam('task');
+        //echo "alert('the task \'" . $task . "\' was saved!');";
+        if (!empty($task)) {
+        Model_Items::addItem($task);
         }
-
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
-        
+    }
+
+    public function updateAction()
+    {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
         $items = Model_Items::getItems();
         $out="";
         foreach ($items as $key => $val) {
@@ -31,6 +34,10 @@ class ModalController extends Zend_Controller_Action
         echo $out;
     }
 
+    public function newAction()
+    {
+        
+    }
 
     public function indexAction()
     {

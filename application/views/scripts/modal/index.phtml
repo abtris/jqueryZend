@@ -1,79 +1,62 @@
-<script type="text/javascript">
-    $(function() {
-        $('#additem').click(function() {
-			$('#dialog').dialog('open');
-		})
-		.hover(
-			function(){
-				$(this).addClass("ui-state-hover");
-			},
-			function(){
-				$(this).removeClass("ui-state-hover");
-			}
-		).mousedown(function(){
-			$(this).addClass("ui-state-active");
-		})
-		.mouseup(function(){
-				$(this).removeClass("ui-state-active");
-		});
+<script>
+$(document).ready(dialogForms);
 
-
-    });
-
-    function submitFormWithAjax(form)
-    {
-          form = $(form);
-          $.ajax({
-            url: form.attr('action'),
-            data: form.serialize(),
-            type: (form.attr('method')),
-            dataType: 'script'
-          });
-          return false;
-    }
-
-</script>
-
-<style type="text/css">
-    body { font-size: 10px; font-family: "Trebuchet MS","Helvetica","Arial","Verdana","sans-serif";}
-    #login input { width:200px;  }
-    #login #submitbutton { width: 80px; }
-    #login dd { text-align: center; }
-    pre { background: #eee; border: 1px solid black; padding: 5px; overflow: auto; }
-</style>
-<div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework and jQuery UI!</span></h1>
-
-
-<h2>Form dialog</h2>
-   <?= $this->form; ?>
-<div>
-
-</div>
-
-<?php
-$content = $this->modalform;
-
-echo $this->dialogContainer("dialog", $content, array('title' => 'Add',
-    'bigiframe' => true,
-    'modal' => true,
-    'resizable'=> false,
-    'autoOpen' =>false,
-     'buttons' => array(
-         'Save'=> "function() { submitFormWithAjax($('#additem')); }",
-         'Cancel'=> "function() { $('#dialog').dialog('close'); }"
-     )),
-    array()
-        );
-
-/*
-     buttons: {
+function dialogForms() {
+  $('a.dialog-form').click(function() {
+    var a = $(this);
+    $.get(a.attr('href'),function(resp){
+      var dialog = $('<div>').attr('id','formDialog').html($(resp).find('form:first').parent('div').html());
+      $('body').append(dialog);
+      dialog.find(':submit').hide();
+      dialog.dialog({
+        title: a.attr('title') ? a.attr('title') : '',
+        modal: true,
+        buttons: {
           'Save': function() {submitFormWithAjax($(this).find('form'));},
           'Cancel': function() {$(this).dialog('close');}
         },
-*/
+        close: function() {$(this).remove();},
+        width: 'auto'
+      });
+    }, 'html');
+    return false;
+  });
+}
+
+function submitFormWithAjax(form) {
+  form = $(form);
+  $.ajax({
+    url: form.attr('action'),
+    data: form.serialize(),
+    type: (form.attr('method')),
+    dataType: 'script'
+  });
+
+   $('#formDialog').dialog('close');
+
+  $.ajax({
+    url:  '<?php echo $this->url(array("controller"=>"modal","action"=>"update")); ?>',
+    type: "POST",
+    dataType: "html",
+    success: function(html) {
+        $('#items').append(html);
+    }
+  });
+
+
+  
+}
+
+ </script>
+<a href="<?php echo $this->url(array("controller"=>"modal","action"=>"new")); ?>" class="dialog-form" title="Add New Item">New Item</a>
+
+
+<select id="items">
+</select>
+
+<?php
+
+Zend_Debug::dump(Model_Items::getItems());
 
 ?>
-
-
 
