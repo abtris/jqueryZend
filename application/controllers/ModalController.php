@@ -27,7 +27,7 @@ class ModalController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
 
         $items = Model_Items::getItems();
-        $out="<select id='items' multiple='multiple'>";
+        $out="<select name='items[]' id='items' multiple='multiple'>";
         foreach ($items as $key => $val) {
             $out.="<option value='$key'>$val</option>";
         }
