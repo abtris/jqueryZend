@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    $(function() {
+        $('#additem').click(function() {
+			$('#dialog').dialog('open');
+		})
+		.hover(
+			function(){
+				$(this).addClass("ui-state-hover");
+			},
+			function(){
+				$(this).removeClass("ui-state-hover");
+			}
+		).mousedown(function(){
+			$(this).addClass("ui-state-active");
+		})
+		.mouseup(function(){
+				$(this).removeClass("ui-state-active");
+		});
+       $("#accordion").accordion({
+			event: "mouseover",
+                        autoHeight: false
+
+		});
+
+    });
+</script>
+
+<style type="text/css">
+    body { font-size: 10px; font-family: "Trebuchet MS","Helvetica","Arial","Verdana","sans-serif";}
+    #login input { width:200px;  }
+    #login #submitbutton { width: 80px; }
+    #login dd { text-align: center; }
+    pre { background: #eee; border: 1px solid black; padding: 5px; overflow: auto; }
+</style>
+<div id="welcome">
+    <h1>Welcome to the <span id="zf-name">Zend Framework and jQuery UI!</span></h1>
+
+
+<h2>Form dialog</h2>
+   <?= $this->form; ?>
+<div>
+
+</div>
+
+<?php
+$content = $this->modalform;
+
+echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false), array());
+
+?>
+
+
+
