@@ -1,25 +1,21 @@
 <?php
 /**
- * Created by IntelliJ IDEA.
- * @author prskavecl
- * @version  * @package  * @filesource
+ * @package  * @version  * @author abtris
  */
 /**
- * @package @@PACKAGE@@
- */
-class ModalController extends Zend_Controller_Action
+ * @package  */
+class WindowController extends Zend_Controller_Action 
 {
-
-    public function testAction()
-    {
+     public function addAction()
+     {
         $task = $this->_request->getParam('task');
-        //echo "alert('the task \'" . $task . "\' was saved!');";
         if (!empty($task)) {
         Model_Items::addItem($task);
         }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
-    }
+     }
+
 
     public function updateAction()
     {
@@ -27,24 +23,17 @@ class ModalController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
 
         $items = Model_Items::getItems();
-        $out="<select id='items' multiple='multiple'>";
+        $out="";
         foreach ($items as $key => $val) {
             $out.="<option value='$key'>$val</option>";
         }
-        $out .= "</select>";
         echo $out;
-    }
-
-    public function newAction()
-    {
-        
-    }
+    }    
 
     public function indexAction()
     {
         $this->view->form = $form = new Form_Items();
         $this->view->modalform = $modalform =  new Form_NewItem();
-        
         $modalform->setAction($this->view->url(array("controller"=>"modal","action"=>"test")));
 
         if ($this->getRequest()->isPost()) {
@@ -55,7 +44,6 @@ class ModalController extends Zend_Controller_Action
             } else {
                 $form->populate($formData);
             }
-        }
-
+        }         
     }
 }

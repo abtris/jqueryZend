@@ -39,7 +39,7 @@ function submitFormWithAjax(form) {
     type: "POST",
     dataType: "html",
     success: function(html) {
-        $('#items').append(html);
+        $('#items').replaceWith(html);
     }
   });
 
@@ -50,13 +50,4 @@ function submitFormWithAjax(form) {
  </script>
 <a href="<?php echo $this->url(array("controller"=>"modal","action"=>"new")); ?>" class="dialog-form" title="Add New Item">New Item</a>
 
-
-<select id="items">
-</select>
-
-<?php
-
-Zend_Debug::dump(Model_Items::getItems());
-
-?>
-
+<?php echo $this->form; ?>
