@@ -16,13 +16,22 @@
 		.mouseup(function(){
 				$(this).removeClass("ui-state-active");
 		});
-       $("#accordion").accordion({
-			event: "mouseover",
-                        autoHeight: false
 
-		});
 
     });
+
+    function submitFormWithAjax(form)
+    {
+          form = $(form);
+          $.ajax({
+            url: form.attr('action'),
+            data: form.serialize(),
+            type: (form.attr('method')),
+            dataType: 'script'
+          });
+          return false;
+    }
+
 </script>
 
 <style type="text/css">
@@ -45,7 +54,24 @@
 <?php
 $content = $this->modalform;
 
-echo $this->dialogContainer("dialog", $content, array('title' => 'Login','bigiframe' => true, 'modal' => true,  'resizable'=> false, 'autoOpen' =>false), array());
+echo $this->dialogContainer("dialog", $content, array('title' => 'Add',
+    'bigiframe' => true,
+    'modal' => true,
+    'resizable'=> false,
+    'autoOpen' =>false,
+     'buttons' => array(
+         'Save'=> "function() { submitFormWithAjax($('#additem')); }",
+         'Cancel'=> "function() { $('#dialog').dialog('close'); }"
+     )),
+    array()
+        );
+
+/*
+     buttons: {
+          'Save': function() {submitFormWithAjax($(this).find('form'));},
+          'Cancel': function() {$(this).dialog('close');}
+        },
+*/
 
 ?>
 
