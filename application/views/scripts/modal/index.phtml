@@ -39,7 +39,7 @@ function submitFormWithAjax(form) {
     type: "POST",
     dataType: "html",
     success: function(html) {
-        $('#items').replaceWith(html);
+        $('#items').append(html);
     }
   });
 

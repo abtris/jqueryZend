@@ -18,7 +18,7 @@ class ModalController extends Zend_Controller_Action
         Model_Items::addItem($task);
         }
         $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setNoRender();                
     }
 
     public function updateAction()
@@ -27,11 +27,10 @@ class ModalController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
 
         $items = Model_Items::getItems();
-        $out="<select name='items[]' id='items' multiple='multiple'>";
+
         foreach ($items as $key => $val) {
-            $out.="<option value='$key'>$val</option>";
+            $out="<option value='$key'>$val</option>";
         }
-        $out .= "</select>";
         echo $out;
     }
 
