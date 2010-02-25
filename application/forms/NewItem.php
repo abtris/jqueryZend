@@ -13,11 +13,13 @@ class Form_NewItem extends Zend_Form
        public function init()
        {
 
-           $this->setName('additem');
+           $this->setName('formDialog');
 
            $this->addElement('text', 'value', array(
                 'Label' => "New Item",
            ));
-        
+
+           $this->addElement('submit', 'save', array(
+           ));
        }
 }

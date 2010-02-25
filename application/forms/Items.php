@@ -18,10 +18,6 @@ class Form_Items extends Zend_Form
                 'multioptions' => Model_Items::getItems()
            ));
 
-           $this->addElement('button', 'additem', array(
-                'Label' => "Add new item" 
-           ));
-
            $this->addElement('text', 'name', array(
                 'Label' => 'Name' 
            ));
