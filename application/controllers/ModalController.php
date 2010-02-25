@@ -36,8 +36,8 @@ class ModalController extends Zend_Controller_Action
 
     public function newAction()
     {
-        $this->view->modalform = $modalform =  new Form_NewItem();
-        $modalform->setAction($this->view->url(array("controller"=>"modal","action"=>"test")));
+        $this->view->form = $form =  new Form_NewItem();
+        $form->setAction($this->view->url(array("controller"=>"modal","action"=>"test")));
     }
 
     public function indexAction()
